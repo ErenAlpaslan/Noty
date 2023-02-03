@@ -1,4 +1,4 @@
-package com.github.noty
+package com.easylife.noty
 
 class Greeting {
     private val platform: Platform = getPlatform()

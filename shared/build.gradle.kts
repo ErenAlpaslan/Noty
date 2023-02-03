@@ -53,7 +53,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.github.noty"
+    namespace = "com.easylife.noty"
     compileSdk = 33
     defaultConfig {
         minSdk = 24

@@ -1,4 +1,4 @@
-package com.github.noty
+package com.easylife.noty
 
 interface Platform {
     val name: String

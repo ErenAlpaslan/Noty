@@ -1,4 +1,4 @@
-package com.github.noty.android
+package com.easylife.noty.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
