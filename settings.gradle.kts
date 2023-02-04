@@ -1,20 +1,20 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
-        gradlePluginPortal()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
 dependencyResolutionManagement {
     repositories {
-        google()
         mavenCentral()
     }
 }
 
 rootProject.name = "Noty"
 include(":notyAndroid")
+include(":core-designsystem")
 include(":shared")
-include(":build-logic")
-include(":build-logic:convention")
+include(":core-navigation")
