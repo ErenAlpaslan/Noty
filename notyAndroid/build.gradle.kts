@@ -1,6 +1,7 @@
 plugins {
     id("noty.android.application")
     id("noty.android.application.compose")
+    id("noty.hilt")
     kotlin("android")
 }
 
@@ -47,8 +48,10 @@ dependencies {
 
     //region Cores
     implementation(project(":core-designsystem"))
+    implementation(project(":core-navigation"))
+    implementation(project("feature-splash"))
     //implementation(project(":core-preferences"))
-    //implementation(project(":core-navigation"))
+
     //endregion
 
     //region Accompanist
