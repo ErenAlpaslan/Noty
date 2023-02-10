@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.core.view.WindowCompat
-import com.easylife.noty.android.ui.screen.main.theme.DiaryTheme
+import com.easylife.noty.android.ui.screen.main.theme.NotyTheme
 import com.easylife.noty.core.navigation.NotyNavigator
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                 navigator.handleNavigationCommands(navHost)
             }
 
-            DiaryTheme {
+            NotyTheme {
                 MainNoty(
                     navController = navHost,
                     navigator = navigator

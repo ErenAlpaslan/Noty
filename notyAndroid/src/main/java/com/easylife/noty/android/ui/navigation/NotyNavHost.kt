@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.easylife.noty.core.navigation.NotyNavigator
 import com.easylife.noty.core.navigation.screen.NotyRoutes.splashRoute
+import com.easylife.noty.feature.main.navigation.mainScreen
 import com.easylife.noty.feature.splash.navigation.splashScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 
@@ -26,11 +27,6 @@ fun NotyNavHost(
         )
     ) {
         splashScreen(navigator)
-        /*themeScreen(navigator)
-        noteScreen(navigator)
-        diaryScreen(navigator)
-        calendarScreen(navigator)
-        insightsScreen(navigator)
-        settingsScreen(navigator)*/
+        mainScreen(navigator)
     }
 }

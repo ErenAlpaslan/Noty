@@ -1,4 +1,4 @@
-package com.easylife.diary.core.designsystem.theme
+package com.easylife.noty.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

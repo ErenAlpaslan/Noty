@@ -49,9 +49,12 @@ dependencies {
     //region Cores
     implementation(project(":core-designsystem"))
     implementation(project(":core-navigation"))
-    implementation(project("feature-splash"))
     //implementation(project(":core-preferences"))
+    //endregion
 
+    //region Features
+    implementation(project("feature-splash"))
+    implementation(project("feature-main"))
     //endregion
 
     //region Accompanist

@@ -12,9 +12,9 @@ object ShareAppHelper {
     fun openShareApp(activity: Activity) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.easylife.diary")
+            putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.easylife.noty")
             putExtra(Intent.EXTRA_SUBJECT, "Daily Diary: Lock and note")
-            putExtra(Intent.EXTRA_TITLE, Uri.parse("https://play.google.com/store/apps/details?id=com.easylife.diary"))
+            putExtra(Intent.EXTRA_TITLE, Uri.parse("https://play.google.com/store/apps/details?id=com.easylife.noty"))
             flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             type = "text/*"
         }
