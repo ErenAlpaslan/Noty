@@ -15,11 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.easylife.noty.core.designsystem.base.BaseScreen
+import com.easylife.noty.core.designsystem.components.NotyTopBar
+import com.easylife.noty.core.designsystem.components.note.NoteView
+import com.easylife.noty.feature.home.view.SearchTextField
 
 /**
  * Created by erenalpaslan on 10.02.2023
  */
-class HomeScreen: BaseScreen<HomeViewModel>() {
+class HomeScreen : BaseScreen<HomeViewModel>() {
     @Composable
     override fun Screen() {
         Content()
@@ -29,23 +32,34 @@ class HomeScreen: BaseScreen<HomeViewModel>() {
     fun Content() {
         Scaffold(
             topBar = {
-                Column {
-                    TopAppBar(
-                        title = {
-                            Text(text = "Noty")
-                        },
-                        actions = {
-                            IconButton(onClick = { /*TODO More button clicked*/ }) {
-                                Icon(imageVector = Icons.Rounded.MoreVert, contentDescription = "More Icon")
-                            }
+                NotyTopBar(
+                    title = "Noty",
+                    actions = {
+                        IconButton(onClick = { /*TODO More button clicked*/ }) {
+                            Icon(
+                                imageVector = Icons.Rounded.MoreVert,
+                                contentDescription = "More Icon"
+                            )
                         }
-                    )
-                    Divider(modifier = Modifier.padding(horizontal = 16.dp))
-                }
+                    },
+                    divider = {
+                        Divider(modifier = Modifier.padding(horizontal = 16.dp))
+                    }
+                )
             }
-        ) {paddingValues ->
-            Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                SearchTextField {searchText ->
+                    viewModel.onSearchTextChanged(searchText)
+                }
 
+                NoteView(list = emptyList()) {
+                    viewModel.onNoteClicked(it)
+                }
             }
         }
     }

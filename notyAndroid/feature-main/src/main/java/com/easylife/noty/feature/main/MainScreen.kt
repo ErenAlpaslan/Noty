@@ -1,20 +1,14 @@
 package com.easylife.noty.feature.main
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.MoreVert
-import androidx.compose.material3.Divider
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.feature.main.navigation.MainNavHost
 import com.easylife.noty.feature.main.view.BottomNavigation
@@ -38,7 +32,21 @@ class MainScreen : BaseScreen<MainViewModel>() {
         Scaffold(
             bottomBar = {
                 BottomNavigation(navController = navController)
-            }
+            },
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {
+
+                    },
+                    shape = CircleShape,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Add,
+                        contentDescription = "Add"
+                    )
+                }
+            },
         ) { paddingValues ->
             MainNavHost(
                 navigator = navigator,

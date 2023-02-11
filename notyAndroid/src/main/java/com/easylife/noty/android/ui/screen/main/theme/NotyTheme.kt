@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.easylife.noty.core.designsystem.theme.black
 
 @Composable
 fun NotyTheme(
@@ -22,15 +23,19 @@ fun NotyTheme(
 ) {
     val colors = if (darkTheme) {
         darkColorScheme(
-            primary = Color(0xFFBB86FC),
-            tertiary = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
+            primary = azure,
+            primaryContainer = azure,
+            onPrimaryContainer = cultured,
+            tertiary = cultured,
+            secondary = black,
         )
     } else {
         lightColorScheme(
-            primary = Color(0xFF6200EE),
-            tertiary = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
+            primary = azure,
+            primaryContainer = azure,
+            onPrimaryContainer = white,
+            tertiary = cultured,
+            secondary = white
         )
     }
     val typography = Typography(
