@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
  */
 @Composable
 fun NotyTopBar(
-    title: String,
+    title: String? = null,
     actions: @Composable RowScope.() -> Unit = {},
     navigationIcon: @Composable () -> Unit = {},
     divider: @Composable () -> Unit = {}
@@ -23,7 +23,9 @@ fun NotyTopBar(
     Column {
         TopAppBar(
             title = {
-                Text(text = title)
+                if (!title.isNullOrEmpty()) {
+                    Text(text = title)
+                }
             },
             actions = {
                 actions()

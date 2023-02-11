@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.easylife.noty.core.designsystem.theme.red
 import com.easylife.noty.core.designsystem.base.BaseScreen
+import com.easylife.noty.core.designsystem.theme.red
 
 /**
  * Created by erenalpaslan on 19.12.2022
@@ -33,9 +33,10 @@ class SplashScreen : BaseScreen<SplashViewModel>() {
                 verticalArrangement = Arrangement.Center
             ) {
                 Image(
-                    painter = painterResource(id = com.easylife.noty.core.designsystem.R.drawable.ic_user),
+                    painter = painterResource(id = com.easylife.noty.core.designsystem.R.drawable.ic_category),
                     contentDescription = "",
-                    modifier = Modifier.size(100.dp)
+                    modifier = Modifier
+                        .size(100.dp)
                         .clip(RoundedCornerShape(12.dp))
                         .background(red)
                         .padding(16.dp)

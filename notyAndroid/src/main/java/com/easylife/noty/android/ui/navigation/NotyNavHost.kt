@@ -6,10 +6,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.easylife.feature.premium.navigation.premiumScreen
 import com.easylife.noty.core.navigation.NotyNavigator
 import com.easylife.noty.core.navigation.screen.NotyRoutes.splashRoute
-import com.easylife.noty.feature.main.navigation.mainScreen
+import com.easylife.noty.feature.home.navigation.homeScreen
+import com.easylife.noty.feature.note.navigation.noteScreen
+import com.easylife.noty.feature.settings.navigation.settingsScreen
 import com.easylife.noty.feature.splash.navigation.splashScreen
+import com.easylife.noty.feature_category.navigation.categoryScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -27,6 +31,10 @@ fun NotyNavHost(
         )
     ) {
         splashScreen(navigator)
-        mainScreen(navigator)
+        homeScreen(navigator)
+        premiumScreen(navigator)
+        categoryScreen(navigator)
+        settingsScreen(navigator)
+        noteScreen(navigator)
     }
 }

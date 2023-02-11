@@ -7,8 +7,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import com.easylife.noty.core.navigation.NotyNavigator
 import com.easylife.noty.core.navigation.screen.NotyRoutes.splashRoute
-import com.google.accompanist.navigation.animation.composable
 import com.easylife.noty.feature.splash.SplashScreen
+import com.google.accompanist.navigation.animation.composable
 
 /**
  * Created by erenalpaslan on 23.12.2022

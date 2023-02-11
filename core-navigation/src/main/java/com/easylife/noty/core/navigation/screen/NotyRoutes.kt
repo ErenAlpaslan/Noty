@@ -5,10 +5,10 @@ package com.easylife.noty.core.navigation.screen
  */
 object NotyRoutes {
     const val splashRoute = "splash_route"
-    const val mainRoute = "main_route"
     const val onboardingRoute = "onboarding_route"
     const val homeRoute = "home_route"
     const val categoryRoute = "category_route"
     const val premiumRoute = "premium_route"
     const val settingsRoute = "settings_route"
+    const val noteRoute = "note_route"
 }

@@ -22,7 +22,7 @@ class SplashViewModel @Inject constructor(
     private val navigator: NotyNavigator
 ) : BaseViewModel() {
 
-    private val _uiState: MutableStateFlow<SplashUiState> = MutableStateFlow(SplashUiState.Loading)
+    private val _uiState: MutableStateFlow<SplashUiState> = MutableStateFlow(SplashUiState.OnBoardedUser)
     val uiState: StateFlow<SplashUiState> = _uiState.asStateFlow()
 
     init {
@@ -36,7 +36,7 @@ class SplashViewModel @Inject constructor(
                 when (it) {
                     SplashUiState.Loading -> {}
                     SplashUiState.NewComer -> navigator.navigate(NotyRoutes.onboardingRoute)
-                    SplashUiState.OnBoardedUser -> navigator.navigate(NotyRoutes.mainRoute) {
+                    SplashUiState.OnBoardedUser -> navigator.navigate(NotyRoutes.homeRoute) {
                         popUpTo(NotyRoutes.splashRoute) {
                             inclusive = true
                         }

@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onSubscription
+import kotlinx.coroutines.flow.update
 
 /**
  * Created by erenalpaslan on 4.01.2023
@@ -36,6 +37,10 @@ abstract class NotyNavigator : Navigator() {
             .collect {
                 navController.handleComposeNavigationCommand(it)
             }
+    }
+
+    fun setNewNavHostController(navController: NavController) {
+        this@NotyNavigator.navControllerFlow.update { navController }
     }
 
     private fun NavController.handleComposeNavigationCommand(navigationCommand: NavigationCommand) {
