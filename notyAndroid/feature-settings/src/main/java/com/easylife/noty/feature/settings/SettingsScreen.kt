@@ -59,7 +59,8 @@ class SettingsScreen: BaseScreen<SettingsViewModel>() {
                 )
                 NavigationButton(
                     title = "Language",
-                    icon = com.easylife.noty.core.designsystem.R.drawable.ic_global
+                    icon = com.easylife.noty.core.designsystem.R.drawable.ic_global,
+                    description = "Default"
                 ) {
 
                 }

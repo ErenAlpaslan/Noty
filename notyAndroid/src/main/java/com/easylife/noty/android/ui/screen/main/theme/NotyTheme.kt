@@ -13,7 +13,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.easylife.noty.core.designsystem.theme.azure
 import com.easylife.noty.core.designsystem.theme.black
+import com.easylife.noty.core.designsystem.theme.cultured
+import com.easylife.noty.core.designsystem.theme.white
 
 @Composable
 fun NotyTheme(

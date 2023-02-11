@@ -9,4 +9,13 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class CategoryViewModel @Inject constructor(): BaseViewModel() {
+
+    fun onSearchTextChanged(searchText: String?) {
+
+    }
+
+    fun onCategoryClicked(text: String) {
+
+    }
+
 }

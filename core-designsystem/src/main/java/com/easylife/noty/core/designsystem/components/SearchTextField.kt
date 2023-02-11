@@ -1,12 +1,11 @@
-package com.easylife.noty.feature.home.view
+package com.easylife.noty.core.designsystem.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -23,6 +22,7 @@ import androidx.compose.ui.unit.dp
  */
 @Composable
 fun SearchTextField(
+    placeholder: @Composable (() -> Unit) = {},
     onTextChanged: (String?) -> Unit
 ) {
     var text by remember {
@@ -36,7 +36,7 @@ fun SearchTextField(
             onTextChanged(it)
         },
         placeholder = {
-            Text(text = "Search notes...")
+            placeholder()
         },
         leadingIcon = {
             Icon(imageVector = Icons.Rounded.Search, contentDescription = "Search")
@@ -48,7 +48,7 @@ fun SearchTextField(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),
-        shape = RoundedCornerShape(16.dp),
+        shape = CircleShape,
         singleLine = true,
         maxLines = 1
     )

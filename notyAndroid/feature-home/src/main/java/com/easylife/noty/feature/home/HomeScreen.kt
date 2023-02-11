@@ -9,13 +9,14 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.core.designsystem.components.NotyTopBar
 import com.easylife.noty.core.designsystem.components.note.NoteView
-import com.easylife.noty.feature.home.view.SearchTextField
+import com.easylife.noty.core.designsystem.components.SearchTextField
 
 /**
  * Created by erenalpaslan on 10.02.2023
@@ -51,7 +52,11 @@ class HomeScreen : BaseScreen<HomeViewModel>() {
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                SearchTextField {searchText ->
+                SearchTextField(
+                    placeholder = {
+                        Text(text = "Search notes...")
+                    }
+                ) {searchText ->
                     viewModel.onSearchTextChanged(searchText)
                 }
 

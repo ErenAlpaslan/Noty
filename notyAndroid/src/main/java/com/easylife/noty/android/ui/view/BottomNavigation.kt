@@ -11,17 +11,8 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.easylife.noty.android.R
-import com.easylife.noty.android.ui.screen.main.theme.azure
 import com.easylife.noty.core.navigation.NotyNavigator
 import com.easylife.noty.core.navigation.screen.NotyRoutes
 

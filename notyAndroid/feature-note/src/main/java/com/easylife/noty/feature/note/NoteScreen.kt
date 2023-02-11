@@ -1,7 +1,6 @@
 package com.easylife.noty.feature.note
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,8 +15,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.core.designsystem.components.NotyTopBar
+import com.easylife.noty.feature.note.view.TextEditorCard
 
 /**
  * Created by erenalpaslan on 11.02.2023
@@ -74,11 +76,17 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                 )
             }
         ) {
-            Column(
+            ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(top = it.calculateTopPadding())
             ) {
-
+                val (dateRef, titleRef, textRef, editorRef) = createRefs()
+                TextEditorCard(modifier = Modifier.constrainAs(editorRef) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(parent.bottom, 16.dp)
+                })
             }
         }
     }
