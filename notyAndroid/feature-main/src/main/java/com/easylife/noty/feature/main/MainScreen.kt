@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.feature.main.navigation.MainNavHost
 import com.easylife.noty.feature.main.view.BottomNavigation
+import com.easylife.noty.feature.main.view.NotyFab
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 /**
@@ -34,18 +35,14 @@ class MainScreen : BaseScreen<MainViewModel>() {
                 BottomNavigation(navController = navController)
             },
             floatingActionButton = {
-                FloatingActionButton(
-                    onClick = {
+                NotyFab(
+                    onAddNoteClicked = {
 
                     },
-                    shape = CircleShape,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Add,
-                        contentDescription = "Add"
-                    )
-                }
+                    onAddCategoryClicked = {
+
+                    }
+                )
             },
         ) { paddingValues ->
             MainNavHost(
