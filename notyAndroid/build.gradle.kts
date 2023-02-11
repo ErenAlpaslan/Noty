@@ -54,7 +54,11 @@ dependencies {
 
     //region Features
     implementation(project("feature-splash"))
-    implementation(project("feature-main"))
+    implementation(project("feature-home"))
+    implementation(project("feature-category"))
+    implementation(project("feature-premium"))
+    implementation(project("feature-settings"))
+    implementation(project("feature-note"))
     //endregion
 
     //region Accompanist

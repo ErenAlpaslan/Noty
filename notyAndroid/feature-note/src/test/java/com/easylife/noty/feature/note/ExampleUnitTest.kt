@@ -1,4 +1,4 @@
-package com.easylife.feature.premium
+package com.easylife.noty.feature.note
 
 import org.junit.Assert.*
 import org.junit.Test
