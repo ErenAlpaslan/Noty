@@ -58,14 +58,6 @@ class SettingsScreen: BaseScreen<SettingsViewModel>() {
                     style = MaterialTheme.typography.labelMedium
                 )
                 NavigationButton(
-                    title = "Language",
-                    icon = com.easylife.noty.core.designsystem.R.drawable.ic_global,
-                    description = "Default"
-                ) {
-
-                }
-                Divider(modifier = Modifier.padding(horizontal = 16.dp))
-                NavigationButton(
                     title = "Notification",
                     icon = com.easylife.noty.core.designsystem.R.drawable.ic_notification
                 ) {

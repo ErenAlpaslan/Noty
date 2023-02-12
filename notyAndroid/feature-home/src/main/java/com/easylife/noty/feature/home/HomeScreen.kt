@@ -1,5 +1,6 @@
 package com.easylife.noty.feature.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.core.designsystem.components.NotyTopBar
 import com.easylife.noty.core.designsystem.components.note.NoteView
 import com.easylife.noty.core.designsystem.components.SearchTextField
+import com.easylife.noty.core.designsystem.theme.red
 
 /**
  * Created by erenalpaslan on 10.02.2023

@@ -2,6 +2,7 @@ package com.easylife.noty.core.designsystem.components.category
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -18,11 +19,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.Card
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -44,7 +51,9 @@ fun CategoryList(
         "Food recipes" to green,
         "Referral code" to azure
     ),
-    onCategoryClicked: (String) -> Unit
+    onCategoryClicked: (String) -> Unit,
+    onEditClicked: () -> Unit,
+    onRemoveClicked: () -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -52,17 +61,30 @@ fun CategoryList(
         contentPadding = PaddingValues(16.dp)
     ) {
         items(list) {
-            CategoryItem(it)
+            CategoryItem(
+                pair = it,
+                onEditClicked = {
+                    onEditClicked()
+                },
+                onRemoveClicked = {
+                    onRemoveClicked()
+                }
+            )
         }
     }
 }
 
 @Composable
-fun CategoryItem(pair: Pair<String, Color>) {
-    Card(
-        onClick = {
+fun CategoryItem(
+    pair: Pair<String, Color>,
+    onEditClicked: () -> Unit,
+    onRemoveClicked: () -> Unit
+) {
+    var menuExpanded by remember {
+        mutableStateOf(false)
+    }
 
-        },
+    Card(
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier.padding(4.dp)
     ) {
@@ -79,8 +101,34 @@ fun CategoryItem(pair: Pair<String, Color>) {
                         .size(64.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Rounded.MoreVert, contentDescription = "More")
+                Box() {
+                    IconButton(onClick = { menuExpanded = true }) {
+                        Icon(imageVector = Icons.Rounded.MoreVert, contentDescription = "More")
+                    }
+                    DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
+                        DropdownMenuItem(
+                            leadingIcon = {
+                                Icon(painter = painterResource(R.drawable.ic_edit), contentDescription = "Edit")
+                            },
+                            text = {
+                                Text(text = "Edit")
+                            },
+                            onClick = {
+                                onEditClicked()
+                            }
+                        )
+                        DropdownMenuItem(
+                            leadingIcon = {
+                                Icon(painter = painterResource(R.drawable.ic_trash), contentDescription = "Edit")
+                            },
+                            text = {
+                                Text(text = "Remove")
+                            },
+                            onClick = {
+                                onRemoveClicked()
+                            }
+                        )
+                    }
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))

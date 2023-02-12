@@ -52,9 +52,17 @@ class CategoryScreen: BaseScreen<CategoryViewModel>() {
                     viewModel.onSearchTextChanged(searchText)
                 }
 
-                CategoryList {
+                CategoryList(
+                    onCategoryClicked = {
 
-                }
+                    },
+                    onEditClicked = {
+
+                    },
+                    onRemoveClicked = {
+
+                    }
+                )
             }
         }
     }

@@ -38,7 +38,9 @@ fun MainNoty(
 
     BottomSheetScaffold(
         sheetContent = {
-            CategorySheetContent()
+            CategorySheetContent {
+
+            }
         },
         sheetPeekHeight = 0.dp,
         scaffoldState = bottomSheetScaffoldState,
