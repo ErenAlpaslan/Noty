@@ -26,6 +26,8 @@ lifecycleCompose = "2.6.0-alpha01"
 androidDesugarJdkLibs = "1.1.5"
 androidxAppCompat = "1.4.2"
 androidxLiveData = "2.5.1"
+multiplatformSettings = "1.0.0"
+realm = "1.6.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -77,6 +79,8 @@ firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+multiplatform-settings = { group = "com.russhwolf", name = "multiplatform-settings", version.ref = "multiplatformSettings"}
+multiplatform-realm = {group = "io.realm.kotlin", name = "library-base", version.ref = "realm"}
 
 #Convention plugin dependencies
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
