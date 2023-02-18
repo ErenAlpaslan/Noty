@@ -33,6 +33,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -60,6 +64,9 @@ class PremiumScreen : BaseScreen<PremiumViewModel>() {
     @Composable
     override fun Screen() {
         val scrollableState = rememberScrollState()
+        var selectedProduct by remember {
+            mutableStateOf(0)
+        }
 
         Scaffold() { paddingValues ->
             Box(modifier = Modifier
@@ -135,24 +142,17 @@ class PremiumScreen : BaseScreen<PremiumViewModel>() {
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         verticalAlignment = Alignment.Bottom
                     ) {
-                        ProductItem(
-                            modifier = Modifier.weight(1f),
-                            title = "Week",
-                            price = "0.99$",
-                            saveTotal = null
-                        )
-                        ProductItem(
-                            modifier = Modifier.weight(1f),
-                            title = "Month",
-                            price = "1.99$",
-                            saveTotal = "SAVE 22%"
-                        )
-                        ProductItem(
-                            modifier = Modifier.weight(1f),
-                            title = "Year",
-                            price = "22,50$",
-                            saveTotal = "SAVE 44%"
-                        )
+                        viewModel.list.forEachIndexed { index, premiumItem ->
+                            ProductItem(
+                                modifier = Modifier.weight(1f),
+                                selected = index == selectedProduct,
+                                title = premiumItem.title,
+                                price = premiumItem.price,
+                                saveTotal = premiumItem.saveTotal
+                            ) {
+                                selectedProduct = index
+                            }
+                        }
                     }
 
                     Button(
@@ -225,17 +225,22 @@ fun FeatureItem(
 @Composable
 fun ProductItem(
     modifier: Modifier = Modifier,
+    selected: Boolean = false,
     title: String,
     price: String,
-    saveTotal: String?
+    saveTotal: String?,
+    onClick: () -> Unit
 ) {
 
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(4.dp)
-            .border(1.dp, gray, RoundedCornerShape(4.dp)),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+            .border(1.dp, if (selected) gold else gray, RoundedCornerShape(4.dp)),
+        colors = CardDefaults.cardColors(containerColor = if (selected) gold.copy(alpha = 0.3f) else Color.Transparent),
+        onClick = {
+            onClick()
+        },
     ) {
         Box(
             modifier = Modifier
