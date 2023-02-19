@@ -28,6 +28,7 @@ androidxAppCompat = "1.4.2"
 androidxLiveData = "2.5.1"
 multiplatformSettings = "1.0.0"
 realm = "1.6.1"
+kotlinCoroutine = "1.6.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -81,6 +82,7 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database-k
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 multiplatform-settings = { group = "com.russhwolf", name = "multiplatform-settings", version.ref = "multiplatformSettings"}
 multiplatform-realm = {group = "io.realm.kotlin", name = "library-base", version.ref = "realm"}
+kotlinx-coroutines = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinCoroutine"}
 
 #Convention plugin dependencies
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }

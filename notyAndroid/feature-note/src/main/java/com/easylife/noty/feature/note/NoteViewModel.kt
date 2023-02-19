@@ -7,6 +7,7 @@ import com.easylife.noty.core.designsystem.base.BaseViewModel
  */
 class NoteViewModel: BaseViewModel() {
 
+
     fun onSaveClicked() {
 
     }
@@ -16,6 +17,14 @@ class NoteViewModel: BaseViewModel() {
     }
 
     fun onUndoClicked() {
+
+    }
+
+    fun onTitleChanged(title: String?) {
+
+    }
+
+    fun onContentChanged(text: String?) {
 
     }
 

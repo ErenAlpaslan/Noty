@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("io.realm.kotlin")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 kotlin {
@@ -28,6 +29,7 @@ kotlin {
             dependencies {
                 implementation(libs.multiplatform.settings)
                 implementation(libs.multiplatform.realm)
+                implementation(libs.kotlinx.coroutines)
             }
         }
         val commonTest by getting {

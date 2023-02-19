@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -24,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,9 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.easylife.noty.core.designsystem.base.BaseScreen
+import com.easylife.noty.core.designsystem.components.NotyBasicTextField
 import com.easylife.noty.core.designsystem.components.NotyTopBar
-import com.easylife.noty.core.designsystem.theme.green
-import com.easylife.noty.core.designsystem.theme.red
 import com.easylife.noty.feature.note.view.TextEditorCard
 
 /**
@@ -49,11 +50,8 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     fun Content() {
-        var title by remember {
-            mutableStateOf("")
-        }
-        var content by remember {
-            mutableStateOf("")
+        var contentHasFocus by remember {
+            mutableStateOf(false)
         }
 
         Scaffold(
@@ -103,6 +101,7 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = it.calculateTopPadding())
+                    .imePadding()
             ) {
                 val (dateRef, titleRef, contentRef, editorRef) = createRefs()
                 Text(
@@ -115,61 +114,51 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                         width = Dimension.fillToConstraints
                     }
                 )
-                TextField(
-                    value = title,
-                    onValueChange = { text ->
-                        title = text
-                    },
-                    placeholder = {
-                        Text(text = "Title")
-                    },
+                NotyBasicTextField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .defaultMinSize(0.dp, 0.dp)
                         .constrainAs(titleRef) {
                             top.linkTo(dateRef.bottom)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
+                            start.linkTo(parent.start, 16.dp)
+                            end.linkTo(parent.end, 16.dp)
                             width = Dimension.fillToConstraints
                         },
-                    colors = TextFieldDefaults.textFieldColors(
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        containerColor = Color.Transparent
-                    ),
-                    singleLine = true,
-                    maxLines = 1,
-                    textStyle = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
-                )
-                TextField(
-                    value = content,
-                    onValueChange = { text ->
-                        content = text
-                    },
-                    placeholder = {
-                        Text(text = "Content here...")
-                    },
+                    textStyle = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
+                    placeholder = "Title",
+                    singleLine = true
+                ) {
+                    viewModel.onTitleChanged(it)
+                }
+                NotyBasicTextField(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .onFocusChanged {
+                            contentHasFocus = it.hasFocus
+                        }
                         .constrainAs(contentRef) {
-                            top.linkTo(titleRef.bottom)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                            bottom.linkTo(parent.bottom)
+                            top.linkTo(titleRef.bottom, 16.dp)
+                            start.linkTo(parent.start, 16.dp)
+                            end.linkTo(parent.end, 16.dp)
+                            if (contentHasFocus) bottom.linkTo(
+                                editorRef.top,
+                                8.dp
+                            ) else bottom.linkTo(parent.bottom)
                             width = Dimension.fillToConstraints
                             height = Dimension.fillToConstraints
                         },
-                    colors = TextFieldDefaults.textFieldColors(
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        containerColor = Color.Transparent
-                    )
+                    placeholder = "Content here...",
+                    textStyle = MaterialTheme.typography.bodyLarge,
+                ) {
+                    viewModel.onContentChanged(it)
+                }
+                TextEditorCard(modifier = Modifier
+                    .constrainAs(editorRef) {
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom, if (contentHasFocus) 0.dp else 24.dp)
+                    }
                 )
-                TextEditorCard(modifier = Modifier.constrainAs(editorRef) {
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom, 24.dp)
-                })
             }
         }
     }
