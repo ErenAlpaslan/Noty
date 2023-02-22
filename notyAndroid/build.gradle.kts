@@ -1,7 +1,7 @@
 plugins {
     id("noty.android.application")
     id("noty.android.application.compose")
-    id("noty.hilt")
+    id("noty.koin")
     kotlin("android")
 }
 
@@ -49,7 +49,6 @@ dependencies {
     //region Cores
     implementation(project(":core-designsystem"))
     implementation(project(":core-navigation"))
-    //implementation(project(":core-preferences"))
     //endregion
 
     //region Features
@@ -68,5 +67,9 @@ dependencies {
     //region Datastore
     implementation(libs.datastore.core)
     implementation(libs.datastore.preferences)
+    //endregion
+
+    //region koin
+    implementation(libs.koin.android)
     //endregion
 }

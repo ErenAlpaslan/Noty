@@ -7,10 +7,10 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 /**
  * Created by erenalpaslan on 19.02.2023
  */
-data class Note(
+class Note: RealmObject {
     @PrimaryKey
-    var id: ObjectId = ObjectId.create(),
-    var timestamp: Long,
-    var title: String?,
-    var content: String?,
-): RealmObject
+    var id: ObjectId = ObjectId.create()
+    var timestamp: Long = 0L
+    var title: String? = null
+    var content: String? = null
+}

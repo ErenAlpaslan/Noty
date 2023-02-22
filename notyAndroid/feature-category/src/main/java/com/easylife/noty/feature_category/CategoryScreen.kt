@@ -9,14 +9,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.core.designsystem.components.NotyTopBar
-import com.easylife.noty.core.designsystem.components.category.CategoryList
 import com.easylife.noty.core.designsystem.components.SearchTextField
+import com.easylife.noty.core.designsystem.components.category.CategoryList
 
 /**
  * Created by erenalpaslan on 10.02.2023

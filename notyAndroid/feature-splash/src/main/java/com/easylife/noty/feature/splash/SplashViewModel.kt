@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.easylife.noty.core.designsystem.base.BaseViewModel
 import com.easylife.noty.core.navigation.NotyNavigator
 import com.easylife.noty.core.navigation.screen.NotyRoutes
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -12,13 +11,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  * Created by erenalpaslan on 19.12.2022
  */
-@HiltViewModel
-class SplashViewModel @Inject constructor(
+class SplashViewModel(
     private val navigator: NotyNavigator
 ) : BaseViewModel() {
 

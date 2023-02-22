@@ -36,9 +36,9 @@ gradlePlugin {
             id = "noty.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
-        register("androidHilt") {
-            id = "noty.hilt"
-            implementationClass = "AndroidHiltConventionPlugin"
+        register("androidKoin") {
+            id = "noty.koin"
+            implementationClass = "AndroidKoinConventionPlugin"
         }
     }
 }

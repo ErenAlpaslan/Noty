@@ -1,4 +1,4 @@
-package com.easylife.noty.domain
+package com.easylife.noty.utils.result
 
 /**
  * Created by erenalpaslan on 19.02.2023

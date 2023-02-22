@@ -11,16 +11,14 @@ import androidx.core.view.WindowCompat
 import com.easylife.noty.android.ui.screen.main.theme.NotyTheme
 import com.easylife.noty.core.navigation.NotyNavigator
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.core.component.KoinComponent
 
-@AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), KoinComponent {
 
     private val viewModel: MainViewModel by viewModels()
 
-    @Inject
-    internal lateinit var navigator: NotyNavigator
+    private val navigator: NotyNavigator by inject()
 
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,6 +1,5 @@
 package com.easylife.noty.android.ui.screen.main
 
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberBottomSheetScaffoldState
@@ -8,7 +7,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -17,8 +15,8 @@ import com.easylife.noty.android.ui.navigation.NotyNavHost
 import com.easylife.noty.android.ui.view.BottomNavRoutes
 import com.easylife.noty.android.ui.view.BottomNavigation
 import com.easylife.noty.android.ui.view.CategorySheetContent
-import com.easylife.noty.core.navigation.NotyNavigator
 import com.easylife.noty.android.ui.view.NotyFab
+import com.easylife.noty.core.navigation.NotyNavigator
 import com.easylife.noty.feature.note.navigation.navigateToNoteScreen
 import kotlinx.coroutines.launch
 

@@ -29,6 +29,9 @@ androidxLiveData = "2.5.1"
 multiplatformSettings = "1.0.0"
 realm = "1.6.1"
 kotlinCoroutine = "1.6.2"
+koin = "3.2.0"
+kotlinxDateTime = "0.4.0"
+navigationCompose = "2.5.3"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -83,11 +86,16 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 multiplatform-settings = { group = "com.russhwolf", name = "multiplatform-settings", version.ref = "multiplatformSettings"}
 multiplatform-realm = {group = "io.realm.kotlin", name = "library-base", version.ref = "realm"}
 kotlinx-coroutines = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinCoroutine"}
+kotlinx-datetime = {group = "org.jetbrains.kotlinx", name ="kotlinx-datetime", version.ref = "kotlinxDateTime"}
+navigation-compose = {group="androidx.navigation", name = "navigation-compose", version.ref="navigationCompose"}
+
 
 #Convention plugin dependencies
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+koin-core = {group = "io.insert-koin", name="koin-core", version.ref="koin"}
+koin-android = {group="io.insert-koin", name="koin-androidx-compose", version.ref="koin"}
 
 [bundles]
 compose = ["androidx.compose.ui", "androidx.compose.material3"]

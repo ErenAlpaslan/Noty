@@ -2,12 +2,11 @@ package com.easylife.noty.core.navigation
 
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.navOptions
-import javax.inject.Inject
 
 /**
  * Created by erenalpaslan on 4.01.2023
  */
-class NotyComposeNavigator @Inject constructor(): NotyNavigator() {
+class NotyComposeNavigator: NotyNavigator() {
     override fun navigate(route: String, optionsBuilder: (NavOptionsBuilder.() -> Unit)?) {
         val options = optionsBuilder?.let { navOptions(it) }
         navigationCommands.tryEmit(NavigationCommand.NavigateToRoute(route, options))

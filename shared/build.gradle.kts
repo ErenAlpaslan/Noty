@@ -30,6 +30,8 @@ kotlin {
                 implementation(libs.multiplatform.settings)
                 implementation(libs.multiplatform.realm)
                 implementation(libs.kotlinx.coroutines)
+                implementation(libs.kotlinx.datetime)
+                api(libs.koin.core)
             }
         }
         val commonTest by getting {
@@ -37,7 +39,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.koin.android)
+            }
+        }
         val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

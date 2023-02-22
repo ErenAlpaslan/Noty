@@ -1,5 +1,6 @@
 package com.easylife.noty.domain
 
+import com.easylife.noty.utils.result.NotyResult
 import kotlinx.coroutines.flow.Flow
 
 /**
