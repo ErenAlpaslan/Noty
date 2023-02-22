@@ -1,15 +1,28 @@
 package com.easylife.noty.feature.note
 
+import android.util.Log
+import androidx.lifecycle.viewModelScope
 import com.easylife.noty.core.designsystem.base.BaseViewModel
+import com.easylife.noty.domain.AddNoteUseCase
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * Created by erenalpaslan on 11.02.2023
  */
-class NoteViewModel: BaseViewModel() {
+class NoteViewModel(
+    private val addNoteUseCase: AddNoteUseCase
+): BaseViewModel() {
 
+    private var title: String? = ""
+    private var content: String? = ""
 
     fun onSaveClicked() {
-
+        viewModelScope.launch {
+            addNoteUseCase.execute(AddNoteUseCase.Param(title, content)).collect {
+                Log.d("NoteControl", "=> $it")
+            }
+        }
     }
 
     fun onRedoClicked() {
@@ -21,11 +34,11 @@ class NoteViewModel: BaseViewModel() {
     }
 
     fun onTitleChanged(title: String?) {
-
+        this.title = title
     }
 
-    fun onContentChanged(text: String?) {
-
+    fun onContentChanged(content: String?) {
+        this.content = content
     }
 
 }

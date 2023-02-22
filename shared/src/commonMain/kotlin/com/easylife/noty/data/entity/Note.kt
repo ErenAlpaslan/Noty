@@ -14,3 +14,10 @@ class Note: RealmObject {
     var title: String? = null
     var content: String? = null
 }
+
+data class NoteUI(
+    val title: String?,
+    val content: String?,
+    val timestamp: Long,
+    val id: ObjectId
+)

@@ -11,12 +11,16 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.core.designsystem.components.NotyTopBar
 import com.easylife.noty.core.designsystem.components.SearchTextField
 import com.easylife.noty.core.designsystem.components.note.NoteView
+import com.easylife.noty.data.entity.Note
+import com.easylife.noty.data.entity.NoteUI
 
 /**
  * Created by erenalpaslan on 10.02.2023
@@ -24,11 +28,17 @@ import com.easylife.noty.core.designsystem.components.note.NoteView
 class HomeScreen : BaseScreen<HomeViewModel>() {
     @Composable
     override fun Screen() {
-        Content()
+        val notes by viewModel.notes.collectAsStateWithLifecycle()
+
+        Content(
+            notes = notes
+        )
     }
 
     @Composable
-    fun Content() {
+    fun Content(
+        notes: List<NoteUI>
+    ) {
         Scaffold(
             topBar = {
                 NotyTopBar(
@@ -60,7 +70,7 @@ class HomeScreen : BaseScreen<HomeViewModel>() {
                     viewModel.onSearchTextChanged(searchText)
                 }
 
-                NoteView(list = emptyList()) {
+                NoteView(list = notes) {
                     viewModel.onNoteClicked(it)
                 }
             }
