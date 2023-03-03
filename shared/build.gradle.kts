@@ -1,6 +1,8 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("io.realm.kotlin")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 kotlin {
@@ -23,13 +25,25 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.multiplatform.settings)
+                implementation(libs.multiplatform.realm)
+                implementation(libs.kotlinx.coroutines)
+                implementation(libs.kotlinx.datetime)
+                api(libs.koin.core)
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.koin.android)
+            }
+        }
         val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -53,7 +67,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.github.noty"
+    namespace = "com.easylife.noty"
     compileSdk = 33
     defaultConfig {
         minSdk = 24

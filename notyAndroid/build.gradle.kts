@@ -1,13 +1,15 @@
 plugins {
-    id("com.android.application")
+    id("noty.android.application")
+    id("noty.android.application.compose")
+    id("noty.koin")
     kotlin("android")
 }
 
 android {
-    namespace = "com.github.noty.android"
+    namespace = "com.easylife.noty.android"
     compileSdk = 33
     defaultConfig {
-        applicationId = "com.github.noty.android"
+        applicationId = "com.easylife.noty.android"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -40,10 +42,34 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.compose.ui:ui:1.3.1")
-    implementation("androidx.compose.ui:ui-tooling:1.3.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.3.1")
-    implementation("androidx.compose.foundation:foundation:1.3.1")
-    implementation("androidx.compose.material:material:1.3.1")
-    implementation("androidx.activity:activity-compose:1.6.1")
+
+    implementation(libs.core.ktx)
+    implementation(libs.androidx.appcompat)
+
+    //region Cores
+    implementation(project(":core-designsystem"))
+    implementation(project(":core-navigation"))
+    //endregion
+
+    //region Features
+    implementation(project("feature-splash"))
+    implementation(project("feature-home"))
+    implementation(project("feature-category"))
+    implementation(project("feature-premium"))
+    implementation(project("feature-settings"))
+    implementation(project("feature-note"))
+    //endregion
+
+    //region Accompanist
+    implementation(libs.accompanist.navigation.animation)
+    //endregion
+
+    //region Datastore
+    implementation(libs.datastore.core)
+    implementation(libs.datastore.preferences)
+    //endregion
+
+    //region koin
+    implementation(libs.koin.android)
+    //endregion
 }
