@@ -9,7 +9,7 @@ import com.easylife.noty.data.entity.NoteUI
 @Composable
 fun NoteView(
     list: List<NoteUI>,
-    onClick: (String) -> Unit
+    onClick: (NoteUI) -> Unit
 ) {
     if (list.isNotEmpty()) {
         NoteList(list = list) {

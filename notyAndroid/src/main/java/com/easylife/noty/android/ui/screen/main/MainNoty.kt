@@ -55,7 +55,7 @@ fun MainNoty(
                 if (currentDestination?.route in BottomNavRoutes.routes) {
                     NotyFab(
                         onAddNoteClicked = {
-                            navigator.navigateToNoteScreen()
+                            navigator.navigateToNoteScreen(null)
                         },
                         onAddCategoryClicked = {
                             coroutineScope.launch {

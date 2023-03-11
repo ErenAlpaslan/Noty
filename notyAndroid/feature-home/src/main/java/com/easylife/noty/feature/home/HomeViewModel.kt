@@ -2,6 +2,8 @@ package com.easylife.noty.feature.home
 
 import androidx.lifecycle.viewModelScope
 import com.easylife.noty.core.designsystem.base.BaseViewModel
+import com.easylife.noty.core.navigation.NotyNavigator
+import com.easylife.noty.core.navigation.screen.NotyRoutes
 import com.easylife.noty.data.entity.Note
 import com.easylife.noty.data.entity.NoteUI
 import com.easylife.noty.domain.GetNotesUseCase
@@ -16,7 +18,8 @@ import kotlinx.coroutines.launch
  * Created by erenalpaslan on 10.02.2023
  */
 class HomeViewModel(
-    private val getNotesUseCase: GetNotesUseCase
+    private val getNotesUseCase: GetNotesUseCase,
+    private val notyNavigator: NotyNavigator
 ) : BaseViewModel() {
 
     private val _notes: MutableStateFlow<List<NoteUI>> = MutableStateFlow(emptyList())
@@ -45,8 +48,9 @@ class HomeViewModel(
 
     }
 
-    fun onNoteClicked(note: String) {
+    fun onNoteClicked(note: NoteUI) {
 
+        notyNavigator.navigate(NotyRoutes.noteRoute+"?noteId=${note.id.toString()}")
     }
 
 }

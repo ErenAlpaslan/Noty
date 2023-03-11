@@ -1,6 +1,7 @@
 package com.easylife.noty.core.designsystem.components.note
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +20,7 @@ import com.easylife.noty.data.entity.NoteUI
 @Composable
 fun NoteList(
     list: List<NoteUI>,
-    onClick: (String) -> Unit
+    onClicked: (NoteUI) -> Unit
 ) {
     LazyVerticalStaggeredGrid(
         modifier = Modifier.fillMaxSize(),
@@ -29,7 +30,12 @@ fun NoteList(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(list) {note ->
-            NoteItem(note)
+            NoteItem(
+                modifier = Modifier.clickable {
+                      onClicked(note)
+                },
+                note
+            )
         }
     }
 }

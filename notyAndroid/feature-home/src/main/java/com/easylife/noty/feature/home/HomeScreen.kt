@@ -11,6 +11,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,8 +20,11 @@ import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.core.designsystem.components.NotyTopBar
 import com.easylife.noty.core.designsystem.components.SearchTextField
 import com.easylife.noty.core.designsystem.components.note.NoteView
+import com.easylife.noty.core.navigation.NavigationKeys
 import com.easylife.noty.data.entity.Note
 import com.easylife.noty.data.entity.NoteUI
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * Created by erenalpaslan on 10.02.2023
@@ -29,6 +33,14 @@ class HomeScreen : BaseScreen<HomeViewModel>() {
     @Composable
     override fun Screen() {
         val notes by viewModel.notes.collectAsStateWithLifecycle()
+
+        LaunchedEffect(viewModel) {
+            navigator.resultFlow<Boolean>(NavigationKeys.ENTRY_AFFECTED).onEach {
+                if (it) {
+                    viewModel.getNotes()
+                }
+            }.launchIn(this)
+        }
 
         Content(
             notes = notes

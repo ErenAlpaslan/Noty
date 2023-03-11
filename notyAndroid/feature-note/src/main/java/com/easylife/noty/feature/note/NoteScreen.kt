@@ -15,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,6 +30,7 @@ import androidx.constraintlayout.compose.Dimension
 import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.core.designsystem.components.NotyBasicTextField
 import com.easylife.noty.core.designsystem.components.NotyTopBar
+import com.easylife.noty.core.designsystem.theme.red
 import com.easylife.noty.feature.note.view.TextEditorCard
 
 /**
@@ -43,8 +45,17 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     fun Content() {
-        var contentHasFocus by remember {
-            mutableStateOf(false)
+        val title = remember {
+            mutableStateOf<String?>("")
+        }
+
+        val text = remember {
+            mutableStateOf<String?>("")
+        }
+
+        LaunchedEffect(key1 = viewModel.noteUI) {
+            title.value = viewModel.noteUI?.title
+            text.value = viewModel.noteUI?.content
         }
 
         Scaffold(
@@ -59,28 +70,12 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                         }
                     },
                     actions = {
-                        IconButton(
-                            onClick = {
-                                viewModel.onUndoClicked()
-                            },
-                            enabled = false
-                        ) {
-                            Icon(
-                                painter = painterResource(id = com.easylife.noty.core.designsystem.R.drawable.ic_undo),
-                                contentDescription = "Undo"
-                            )
+                        TextButton(onClick = {
+                            viewModel.onDeleteClicked()
+                        }) {
+                            Text(text = "Delete", color = red)
                         }
-                        IconButton(
-                            onClick = {
-                                viewModel.onRedoClicked()
-                            },
-                            enabled = false
-                        ) {
-                            Icon(
-                                painter = painterResource(id = com.easylife.noty.core.designsystem.R.drawable.ic_redo),
-                                contentDescription = "Redo"
-                            )
-                        }
+
                         TextButton(onClick = {
                             viewModel.onSaveClicked()
                         }) {
@@ -89,7 +84,8 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                     }
                 )
             }
-        ) {
+        )
+        {
             ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize()
@@ -108,6 +104,7 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                     }
                 )
                 NotyBasicTextField(
+                    text = title,
                     modifier = Modifier
                         .fillMaxWidth()
                         .defaultMinSize(0.dp, 0.dp)
@@ -118,30 +115,25 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                             width = Dimension.fillToConstraints
                         },
                     textStyle = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
-                    placeholder = "Title",
-                    singleLine = true
+                    placeholder = viewModel.noteUI?.title ?: "Title",
+                    singleLine = true,
                 ) {
                     viewModel.onTitleChanged(it)
                 }
                 NotyBasicTextField(
+                    text = text,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .onFocusChanged {
-                            contentHasFocus = it.hasFocus
-                        }
                         .constrainAs(contentRef) {
                             top.linkTo(titleRef.bottom, 16.dp)
                             start.linkTo(parent.start, 16.dp)
                             end.linkTo(parent.end, 16.dp)
-                            if (contentHasFocus) bottom.linkTo(
-                                editorRef.top,
-                                8.dp
-                            ) else bottom.linkTo(parent.bottom)
+                            bottom.linkTo(editorRef.top, 8.dp)
                             width = Dimension.fillToConstraints
                             height = Dimension.fillToConstraints
                         },
                     placeholder = "Content here...",
-                    textStyle = MaterialTheme.typography.bodyLarge,
+                    textStyle = MaterialTheme.typography.bodyLarge
                 ) {
                     viewModel.onContentChanged(it)
                 }
@@ -149,7 +141,7 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                     .constrainAs(editorRef) {
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
-                        bottom.linkTo(parent.bottom, if (contentHasFocus) 0.dp else 24.dp)
+                        bottom.linkTo(parent.bottom)
                     }
                 )
             }

@@ -21,7 +21,7 @@ fun TextEditorCard(modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(horizontal = 16.dp),
         shape = CircleShape,
     ) {
         Row(

@@ -5,6 +5,7 @@ import androidx.compose.material.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,20 +20,17 @@ import com.easylife.noty.core.designsystem.theme.azure
  */
 @Composable
 fun NotyBasicTextField(
+    text: MutableState<String?>,
     modifier: Modifier = Modifier,
     placeholder: String? = null,
     singleLine: Boolean = false,
     textStyle: TextStyle = LocalTextStyle.current,
     onValueChanged: (String?) -> Unit
 ) {
-    var text by remember {
-        mutableStateOf("")
-    }
-
     BasicTextField(
-        value = text,
+        value = text.value ?: "",
         onValueChange = {
-            text = it
+            text.value = it
             onValueChanged(it)
         },
         modifier = modifier,
@@ -40,7 +38,7 @@ fun NotyBasicTextField(
         maxLines = if (singleLine) 1 else Int.MAX_VALUE,
         singleLine = singleLine,
         decorationBox = {
-            if (text.isEmpty()) {
+            if (text.value.isNullOrEmpty()) {
                 Text(
                     text = placeholder ?: "",
                     style = textStyle

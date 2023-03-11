@@ -9,4 +9,6 @@ import org.koin.dsl.module
 val useCaseModule = module {
     factoryOf(::AddNoteUseCase)
     factoryOf(::GetNotesUseCase)
+    factoryOf(::DeleteNoteUseCase)
+    factoryOf(::GetNoteUseCase)
 }

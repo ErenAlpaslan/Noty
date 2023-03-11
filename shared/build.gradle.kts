@@ -3,6 +3,7 @@ plugins {
     id("com.android.library")
     id("io.realm.kotlin")
     id("org.jetbrains.kotlin.kapt")
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
 kotlin {
@@ -28,7 +29,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.multiplatform.settings)
-                implementation(libs.multiplatform.realm)
+                api(libs.multiplatform.realm)
                 implementation(libs.kotlinx.coroutines)
                 implementation(libs.kotlinx.datetime)
                 api(libs.koin.core)
