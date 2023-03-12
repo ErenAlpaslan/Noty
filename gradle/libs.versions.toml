@@ -90,7 +90,6 @@ kotlinx-coroutines = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutine
 kotlinx-datetime = {group = "org.jetbrains.kotlinx", name ="kotlinx-datetime", version.ref = "kotlinxDateTime"}
 navigation-compose = {group="androidx.navigation", name = "navigation-compose", version.ref="navigationCompose"}
 
-
 #Convention plugin dependencies
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }

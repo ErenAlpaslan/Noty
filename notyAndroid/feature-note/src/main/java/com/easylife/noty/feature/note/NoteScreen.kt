@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.core.text.HtmlCompat
 import com.easylife.noty.core.designsystem.base.BaseScreen
 import com.easylife.noty.core.designsystem.components.NotyBasicTextField
 import com.easylife.noty.core.designsystem.components.NotyTopBar
@@ -45,6 +47,8 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     fun Content() {
+        val uiState by viewModel.uiState.collectAsState()
+
         val title = remember {
             mutableStateOf<String?>("")
         }
@@ -56,6 +60,10 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
         LaunchedEffect(key1 = viewModel.noteUI) {
             title.value = viewModel.noteUI?.title
             text.value = viewModel.noteUI?.content
+        }
+
+        LaunchedEffect(key1 = uiState) {
+            text.value = uiState.content
         }
 
         Scaffold(
@@ -133,7 +141,8 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                             height = Dimension.fillToConstraints
                         },
                     placeholder = "Content here...",
-                    textStyle = MaterialTheme.typography.bodyLarge
+                    textStyle = MaterialTheme.typography.bodyLarge,
+                    isHtml = true
                 ) {
                     viewModel.onContentChanged(it)
                 }
