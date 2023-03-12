@@ -11,4 +11,5 @@ val useCaseModule = module {
     factoryOf(::GetNotesUseCase)
     factoryOf(::DeleteNoteUseCase)
     factoryOf(::GetNoteUseCase)
+    factoryOf(::UpdateNoteUseCase)
 }

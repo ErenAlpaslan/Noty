@@ -1,5 +1,6 @@
 package com.easylife.noty.core.designsystem.components
 
+import android.text.Html
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -26,14 +27,10 @@ fun NotyBasicTextField(
     placeholder: String? = null,
     singleLine: Boolean = false,
     textStyle: TextStyle = LocalTextStyle.current,
-    isHtml: Boolean = false,
     onValueChanged: (String?) -> Unit
 ) {
     BasicTextField(
-        value = if (isHtml)
-            HtmlCompat.fromHtml(text.value ?: "", HtmlCompat.FROM_HTML_MODE_COMPACT).toString()
-        else
-            text.value ?: "",
+        value = text.value ?: "",
         onValueChange = {
             text.value = it
             onValueChanged(it)

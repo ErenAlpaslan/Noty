@@ -10,10 +10,9 @@ import com.easylife.noty.data.entity.NoteUI
 import com.easylife.noty.domain.AddNoteUseCase
 import com.easylife.noty.domain.DeleteNoteUseCase
 import com.easylife.noty.domain.GetNoteUseCase
+import com.easylife.noty.domain.UpdateNoteUseCase
 import com.easylife.noty.utils.result.NotyResult
 import kotlinx.coroutines.flow.MutableStateFlow
-import com.easylife.noty.utils.markdown.MarkdownHandler
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -25,8 +24,8 @@ class NoteViewModel(
     private val addNoteUseCase: AddNoteUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
     private val getNoteUseCase: GetNoteUseCase,
-    private val savedStateHandle: SavedStateHandle,
-    private val markdownHandler: MarkdownHandler
+    private val updateNoteUseCase: UpdateNoteUseCase,
+    private val savedStateHandle: SavedStateHandle
 ): BaseViewModel() {
 
     val uiState: MutableStateFlow<NoteUiState> = MutableStateFlow(NoteUiState())
@@ -34,12 +33,6 @@ class NoteViewModel(
 
     init {
         viewModelScope.launch {
-            markdownHandler.result.collectLatest { html ->
-                uiState.update {
-                    it.copy(content = html)
-                }
-            }
-
             val id: String? = savedStateHandle[NavigationKeys.ID]
             getNote(id)
         }
@@ -53,7 +46,6 @@ class NoteViewModel(
                         is NotyResult.Error -> _error.postValue(result.message)
                         is NotyResult.Success -> {
                             noteUI = result.data
-                            markdownHandler.updateInput(noteUI?.content)
                             uiState.update {
                                 it.copy(
                                     title = noteUI?.title,
@@ -69,21 +61,51 @@ class NoteViewModel(
 
     fun onSaveClicked() {
         viewModelScope.launch {
-            addNoteUseCase.execute(AddNoteUseCase.Param(
-                uiState.value.title,
-                uiState.value.content
-            )).collect {result ->
-               when(result) {
-                   is NotyResult.Error -> _error.postValue(result.message)
-                   is NotyResult.Success -> {
-                       notyNavigator.navigateBackWithResult(
-                           key = NavigationKeys.ENTRY_AFFECTED,
-                           result = true
-                       )
-                   }
-               }
+            if (noteUI == null) {
+                addNote()
+            }else {
+                updateNote()
             }
         }
+    }
+
+    private suspend fun addNote() {
+        addNoteUseCase.execute(AddNoteUseCase.Param(
+            uiState.value.title,
+            uiState.value.content
+        )).collect {result ->
+            when(result) {
+                is NotyResult.Error -> _error.postValue(result.message)
+                is NotyResult.Success -> {
+                    notyNavigator.navigateBackWithResult(
+                        key = NavigationKeys.ENTRY_AFFECTED,
+                        result = true
+                    )
+                }
+            }
+        }
+    }
+
+    private suspend fun updateNote() {
+        noteUI?.let { note ->
+            updateNoteUseCase.execute(UpdateNoteUseCase.Param(
+                note.apply {
+                    this.content = uiState.value.content
+                    this.title = uiState.value.title
+                }
+            )).collect {result ->
+                when(result) {
+                    is NotyResult.Error -> _error.postValue(result.message)
+                    is NotyResult.Success -> {
+                        notyNavigator.navigateBackWithResult(
+                            key = NavigationKeys.ENTRY_AFFECTED,
+                            result = true
+                        )
+                    }
+                }
+            }
+        }
+
     }
 
     fun onDeleteClicked() {
@@ -115,7 +137,6 @@ class NoteViewModel(
             uiState.update {
                 it.copy(content = content)
             }
-            markdownHandler.updateInput(content)
         }
     }
 

@@ -62,10 +62,6 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
             text.value = viewModel.noteUI?.content
         }
 
-        LaunchedEffect(key1 = uiState) {
-            text.value = uiState.content
-        }
-
         Scaffold(
             topBar = {
                 NotyTopBar(
@@ -141,17 +137,17 @@ class NoteScreen : BaseScreen<NoteViewModel>() {
                             height = Dimension.fillToConstraints
                         },
                     placeholder = "Content here...",
-                    textStyle = MaterialTheme.typography.bodyLarge,
-                    isHtml = true
+                    textStyle = MaterialTheme.typography.bodyLarge
                 ) {
                     viewModel.onContentChanged(it)
                 }
-                TextEditorCard(modifier = Modifier
-                    .constrainAs(editorRef) {
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        bottom.linkTo(parent.bottom)
-                    }
+                TextEditorCard(
+                    modifier = Modifier
+                        .constrainAs(editorRef) {
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                            bottom.linkTo(parent.bottom)
+                        }
                 )
             }
         }

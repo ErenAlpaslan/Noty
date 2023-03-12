@@ -16,8 +16,8 @@ class Note: RealmObject {
 }
 
 data class NoteUI(
-    val title: String?,
-    val content: String?,
+    var title: String?,
+    var content: String?,
     val timestamp: Long,
     val id: ObjectId
 )

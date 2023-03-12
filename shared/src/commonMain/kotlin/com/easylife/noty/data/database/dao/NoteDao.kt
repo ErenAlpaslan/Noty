@@ -16,4 +16,6 @@ interface NoteDao {
 
     suspend fun getNote(id: String?): Note?
 
+    suspend fun updateNote(note: NoteUI)
+
 }
